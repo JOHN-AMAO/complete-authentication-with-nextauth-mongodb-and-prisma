@@ -4,8 +4,8 @@
  */
 "use client";
 import { Button } from "@/components/ui/button";
-import { useCallback, useEffect, useState } from "react";
-import Input from "../ui/Input";
+import { useEffect, useState } from "react";
+import Input from "./Input";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -18,18 +18,11 @@ export function AuthForm() {
   const [variant, setVariant] = useState<Variant>("REGISTER");
   const session = useSession();
   const router = useRouter();
-  const toggleVariant = useCallback(() => {
-    if (variant === "REGISTER") {
-      setVariant("LOGIN");
-    } else {
-      setVariant("REGISTER");
-    }
-  }, [variant]);
 
   useEffect(() => {
     if (session?.status === "authenticated") {
       console.log("authenticated");
-      router.push("/posts");
+      router.push("/home");
     }
   }, [session, router]);
 
@@ -63,30 +56,32 @@ export function AuthForm() {
         }
         if (callback?.ok && !callback.error) {
           toast.success("Sucess");
-          router.push("/posts");
+          router.push("/home");
         }
       });
     }
   };
 
   return (
-    <div className='min-h-screen bg-black flex justify-center items-center p-4'>
+    <div className='min-h-screen bg-[#08111f] flex justify-center items-center p-4'>
       <div className='bg-white p-8 rounded-lg shadow-lg max-w-md w-full space-y-8'>
         <div className='space-y-6'>
           <h2 className='text-center text-3xl font-extrabold text-gray-900'>
             {variant === "LOGIN" ? "LOGIN" : "REGISTER"}
           </h2>
           <div className='flex justify-center items-center '>
-            <div className='flex justify-end bg-gray-700 text-white px-12 py-2 rounded shadow-lg'>
+            <div className='flex justify-end bg-black text-white px-12 py-2 rounded shadow-lg'>
               <Button
-                className={` mr-6 ${variant === "LOGIN" && "bg-black"} px-6`}
+                className={` mr-6 ${variant === "LOGIN" && "bg-gray-700"} px-6`}
                 variant='ghost'
                 onClick={() => setVariant("LOGIN")}
               >
                 Login
               </Button>
               <Button
-                className={` ml-6 ${variant === "REGISTER" && "bg-black"} px-6`}
+                className={` ml-6 ${
+                  variant === "REGISTER" && "bg-gray-700"
+                } px-6`}
                 variant='ghost'
                 onClick={() => setVariant("REGISTER")}
               >
@@ -95,7 +90,7 @@ export function AuthForm() {
             </div>
           </div>
           <p className='mt-2 text-center font-semibold text-sm text-black'>
-            Fill the form to use xHangout
+            Fill the form to use SnapLearn
           </p>
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -123,24 +118,24 @@ export function AuthForm() {
             />
             <div className='rounded-md shadow-sm -space-y-px'></div>
             <div>
-              <Button className='w-full p-5 bg-purple-900'>
+              <Button className='w-full p-5 bg-[#0a1e22] text-white'>
                 {variant === "LOGIN" ? "LOGIN" : "REGISTER"}
               </Button>
             </div>
           </form>
           <div className='space-y-4'>
             <div>
-              <h3 className='text-sm font-semibold text-black'>
+              <h3 className='text-sm font-semibold text-white'>
                 Additional options:
               </h3>
             </div>
             <Button
-              className='w-full flex justify-center bg-violet-900 items-center space-x-2'
+              className='w-full flex justify-center bg-[#0a1e22] items-center space-x-2'
               variant='outline'
               onClick={() => socialAction("google")}
             >
-              <ChromeIcon className='w-5 h-5 text-black' />
-              <span>
+              <ChromeIcon className='w-5 h-5 text-white' />
+              <span className='text-white'>
                 {variant === "LOGIN"
                   ? "Log in with Google"
                   : "Sign up with Google"}

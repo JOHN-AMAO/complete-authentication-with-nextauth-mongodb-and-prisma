@@ -7,8 +7,11 @@ import AuthContext from "./context/AuthContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "xHangout - GenZ Social media",
-  description: "Connect with your frieds, chat, live video, groups and more",
+  title: "SnapLearn - Changing the way students learn ",
+  description: "Virtual classes for everyone",
+  icons: {
+    icon: "/icons/logo.svg",
+  },
 };
 
 export default function RootLayout({
